@@ -507,7 +507,6 @@ dialog#lightbox img { max-width: 94vw; max-height: 86vh; width: auto; height: au
     <i class="spark" style="--x:50%;--y:76%;--d:1.05s;--s:20px"></i>
     <i class="spark spark--idle" style="--x:84%;--y:91%;--s:16px"></i>
   </div>
-  <p class="intro__guest" id="intro-guest" hidden><small>Pre</small><span id="guest-name"></span></p>
   <p class="intro__hint">Ťuknite na pečať</p>
   <div class="intro__loading" aria-hidden="true"><i></i><i></i><i></i></div>
 </div>
@@ -680,18 +679,6 @@ dialog#lightbox img { max-width: 94vw; max-height: 86vh; width: auto; height: au
   const root = document.documentElement;
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // Persönliche Anrede: Link mit ?an=Familie%20Huber oder #Familie-Huber
-  let guest = "";
-  try { guest = new URLSearchParams(location.search).get("pre") || new URLSearchParams(location.search).get("an") || ""; } catch (e) {}
-  if (!guest && location.hash.length > 1) {
-    try { guest = decodeURIComponent(location.hash.slice(1)).replace(/[-_+]+/g, " "); } catch (e) {}
-  }
-  guest = guest.trim().slice(0, 60);
-  if (guest) {
-    $("#guest-name").textContent = guest;
-    $("#intro-guest").hidden = false;
-    if (guest.length > 14) $("#intro-guest").classList.add("is-long");
-  }
 
   // Musik
   const audio = $("#music"), musicBtn = $("#music-btn");
